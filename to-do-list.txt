@@ -1,0 +1,11 @@
+(x) indicator (x or o) [radios]
+
+(x) name with option to change it [input]
+
+(x) cpu or real person [checkbox]
+
+(x) difficulty setting (maybe) [dropdown?]
+
+(x) start button [button]
+
+( ) play again button [button]
