@@ -110,3 +110,22 @@ fieldset {
 	outline: 1px solid black;
 	border-radius: 8px;
 }
+
+.gameboard {
+	grid-template-columns: repeat(3, 275px);
+	grid-auto-rows: 275px;
+	gap: 1rem;
+}
+
+.gameboard div {
+	background-color: aquamarine;
+	border-radius: 16px;
+}
+
+.gameboard div.active-x {
+	background-color: red;
+}
+
+.gameboard div.active-o {
+	background-color: green;
+}
