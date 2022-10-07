@@ -1,4 +1,4 @@
-(x) indicator (x or o) [radios]
+(x) marker (x or o) [radios]
 
 (x) name with option to change it [input]
 
