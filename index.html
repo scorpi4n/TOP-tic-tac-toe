@@ -11,26 +11,29 @@
 <body>
 	<h1>Tic Tac Toe</h1>
 	<form action="#" method="post">
-		<fieldset class="flex">
+		<fieldset id="form-1" class="flex">
 			<legend>Create your character</legend>
+			<div>
 			<span>Do you want to play as X's or O's?</span>
-			<label for="X">
-				X
-				<input checked type="radio" name="shape" id="X">
-			</label>
-			<label for="O">
-				O
-				<input type="radio" name="shape" id="O">
-			</label>
+				<label for="X">
+					<input checked type="radio" name="shape" id="X">
+					X
+				</label>
+				<label for="O">
+					<input type="radio" name="shape" id="O">
+					O
+				</label>
+			</div>
 			<label for="name">
 				And what shall I call you?
 				<input type="text" name="name" id="name">
 			</label>
-			<div class="buttons">
+			<div class="buttons flex">
+				<div class="fake-button"></div>
 				<button type="button">Next</button>
 			</div>
 		</fieldset>
-		<fieldset class="flex">
+		<fieldset id="form-2" class="flex">
 			<legend>Choose your enemy</legend>
 			<label for="ai">
 				Do you have a friend to play against?
@@ -45,7 +48,7 @@
 					<option value="3">Impossibly well</option>
 				</select>
 			</label>
-			<div class="buttons">
+			<div class="buttons flex">
 				<button type="button">Back</button>
 				<button type="submit">Play</button>
 			</div>
