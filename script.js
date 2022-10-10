@@ -18,7 +18,6 @@ const gameboard = (function() {
 				div = i
 			}
 		}
-		console.log(div)
 		div.classList.add(`active-${marker}`)
 		board.splice(index, 1, marker)
 	}
