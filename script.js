@@ -47,16 +47,23 @@ const form = (function() {
 
 const gameboard = (function() {
 	let board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	let HTMLgameboard = document.querySelector('.gameboard')
+	let htmlGameboard = document.querySelector('.gameboard')
 
 	function render() {
-		HTMLgameboard.style.display = 'grid'
+		htmlGameboard.style.display = 'grid'
 		for (i of board) {
 			let div = document.createElement('div')
-			div.classList.add('cell')
+			div.classList.add('cell', 'window')
 			div.setAttribute('data-index', board.indexOf(i))
-			HTMLgameboard.appendChild(div)
+			htmlGameboard.appendChild(div)
 		}
+	}
+	
+	function unrender() {
+		while (htmlGameboard.lastChild) {
+			htmlGameboard.removeChild(htmlGameboard.lastChild)
+		}
+		htmlGameboard.style.display = 'none'
 	}
 
 	function pickCell(index) {
@@ -107,6 +114,7 @@ const gameboard = (function() {
 	
 	return {
 		render,
+		unrender,
 		placeMarker,
 		checkForWin,
 	}
