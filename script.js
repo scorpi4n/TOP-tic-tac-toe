@@ -1,9 +1,17 @@
 const form = (function() {
-	let checkbox = document.getElementById('ai')
+	const checkbox = document.getElementById('ai')
 	checkbox.addEventListener('input', toggleDifficultyInput)
-	let aiBanter = checkbox.nextElementSibling
-	let enemyNameInput = document.querySelector('label[for="name-2"]')
-	// let submitBtn = docuent.getElementById('submit')
+	const aiBanter = checkbox.nextElementSibling
+	const enemyNameInput = document.querySelector('label[for="name-2"]')
+	// const submitBtn = docuent.getElementById('submit')
+	
+	function addEventListeners() {
+		checkbox.addEventListener('input', toggleDifficultyInput)
+	}
+	
+	function removeEventListeners() {
+		checkbox.removeEventListener('input', toggleDifficultyInput)
+	}
 
 	function toggleDifficultyInput() {
 		let difficulty = document.getElementById('difficulty-setting')
@@ -18,6 +26,23 @@ const form = (function() {
 			enemyNameInput.style.display = 'none'
 		}
 	}
+
+	function render() {
+		addEventListeners()
+		const form = document.querySelector('form')
+		form.style.display = 'flex'
+	}
+
+	function unrender() {
+		removeEventListeners()
+		const form = document.querySelector('form')
+		form.style.display = 'none'
+	}
+
+	return {
+		render,
+		unrender
+	}
 })()
 
 const gameboard = (function() {
@@ -25,6 +50,7 @@ const gameboard = (function() {
 	let HTMLgameboard = document.querySelector('.gameboard')
 
 	function render() {
+		HTMLgameboard.style.display = 'grid'
 		for (i of board) {
 			let div = document.createElement('div')
 			div.classList.add('cell')
@@ -83,7 +109,6 @@ const gameboard = (function() {
 		render,
 		placeMarker,
 		checkForWin,
-		// createPlayers
 	}
 })()
 
