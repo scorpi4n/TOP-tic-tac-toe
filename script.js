@@ -1,31 +1,21 @@
 const form = (function() {
-	let form1 = document.getElementById('form-1')
-	let nextBtn = document.getElementById('next')
-	nextBtn.addEventListener('click', nextForm)
-	let form2 = document.getElementById('form-2')
 	let checkbox = document.getElementById('ai')
 	checkbox.addEventListener('input', toggleDifficultyInput)
-	let backBtn = document.getElementById('back')
-	backBtn.addEventListener('click', prevForm)
-	let submitBtn = document.getElementById('submit')
-
-	function nextForm() {
-		form1.style.left = '-200vw'
-		form2.style.left = '15vw'
-	}
-	
-	function prevForm() {
-		form1.style.left = '15vw'
-		form2.style.left = '200vw'
-	}
+	let aiBanter = checkbox.nextElementSibling
+	let enemyNameInput = document.querySelector('label[for="name-2"]')
+	// let submitBtn = docuent.getElementById('submit')
 
 	function toggleDifficultyInput() {
 		let difficulty = document.getElementById('difficulty-setting')
 		
 		if (checkbox.checked == true) {
 			difficulty.style.display = 'none'
+			aiBanter.style.display = 'none'
+			enemyNameInput.style.display = 'block'
 		} else {
 			difficulty.style.display = 'block'
+			aiBanter.style.display = 'inline'
+			enemyNameInput.style.display = 'none'
 		}
 	}
 })()
@@ -93,7 +83,7 @@ const gameboard = (function() {
 		render,
 		placeMarker,
 		checkForWin,
-		createPlayers
+		// createPlayers
 	}
 })()
 
