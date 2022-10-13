@@ -82,7 +82,7 @@ form button {
 }
 
 .gameboard {
-	--cell-size: clamp(1rem, 250px, 15vw);
+	--cell-size: clamp(1rem, 250px, 25vh);
 
 	display: none;
 
