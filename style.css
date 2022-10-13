@@ -19,7 +19,7 @@ body {
 }
 
 .title {
-	height: 4rem;
+	width: max-content;
 	text-align: center;
 
 	grid-column: 6 / -6;
