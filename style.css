@@ -40,8 +40,11 @@ body {
 	align-items: center;
 }
 
-form {
+.wrapper .window {
 	background-color: rgb(10, 10, 10, .1);
+}
+
+form {
 	position: relative;
 	padding: 3rem 4rem;
 	border-radius: 1rem;
@@ -79,16 +82,18 @@ form button {
 }
 
 .gameboard {
+	--cell-size: clamp(1rem, 250px, 15vw);
+
 	display: none;
 
-	grid-template-columns: repeat(3, 275px);
-	grid-auto-rows: 275px;
+	grid-template-columns: repeat(3, var(--cell-size));
+	grid-auto-rows: var(--cell-size);
 	gap: 1rem;
 }
 
 .gameboard div {
 	background-color: aquamarine;
-	border-radius: 16px;
+	border-radius: 1rem;
 }
 
 .gameboard div.active-x {
