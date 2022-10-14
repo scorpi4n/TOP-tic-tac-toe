@@ -100,6 +100,7 @@ form button {
 	font-family: 'Permanent Marker', serif;
 	font-size: calc(var(--cell-size) / 1.25);
 	text-transform: uppercase;
+	user-select: none;
 	color: rgb(45, 45, 45);
 	background-color: aquamarine;
 	border-radius: 1rem;
