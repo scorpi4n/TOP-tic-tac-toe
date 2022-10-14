@@ -1,4 +1,9 @@
-/* variables */
+/* fonts */
+
+@font-face {
+	font-family: 'Permanent Marker';
+	src: url(./assets/PermanentMarker-Regular.ttf);
+}
 
 /* custom styling */
 
@@ -92,14 +97,24 @@ form button {
 }
 
 .gameboard div {
+	font-family: 'Permanent Marker', serif;
+	font-size: calc(var(--cell-size) / 1.25);
+	text-transform: uppercase;
+	color: rgb(45, 45, 45);
 	background-color: aquamarine;
 	border-radius: 1rem;
+	width: 100%;
+	height: 100%;
+
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
 .gameboard div.active-x {
-	background-color: red;
+	background-color: hsl(351, 100%, 86%, .8);
 }
 
 .gameboard div.active-o {
-	background-color: green;
+	background-color: hsl(120, 100%, 86%, .8);
 }
