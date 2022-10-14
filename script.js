@@ -53,7 +53,7 @@ const gameboard = (function() {
 		htmlGameboard.style.display = 'grid'
 		for (i of board) {
 			let div = document.createElement('div')
-			div.classList.add('cell', 'window')
+			div.classList.add('cell', 'window', 'flex')
 			div.setAttribute('data-index', board.indexOf(i))
 			htmlGameboard.appendChild(div)
 		}
@@ -82,6 +82,7 @@ const gameboard = (function() {
 			console.error('Somebody has already gone there.')
 		} else {
 			div.classList.add(`active-${marker}`)
+			div.innerText = `${marker}`
 			board.splice(index, 1, marker)
 		}
 	}
