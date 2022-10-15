@@ -59,27 +59,6 @@ const gameboard = (function() {
 		currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1
 	}
 
-	function render() {
-		htmlGameboard.style.display = 'grid'
-		for (i of board) {
-			let div = document.createElement('div')
-			div.classList.add('cell', 'window', 'flex')
-			div.setAttribute('data-index', board.indexOf(i))
-			div.addEventListener('click', function() {
-				currentPlayer.playTurn(div.dataset.index)
-				togglePlayer()
-			})
-			htmlGameboard.appendChild(div)
-		}
-	}
-	
-	function unrender() {
-		while (htmlGameboard.lastChild) {
-			htmlGameboard.removeChild(htmlGameboard.lastChild)
-		}
-		htmlGameboard.style.display = 'none'
-	}
-
 	function pickCell(index) {
 		let cells = document.querySelectorAll('.cell')
 		for (i of cells) {
@@ -126,12 +105,33 @@ const gameboard = (function() {
 			}
 		}
 	}
+
+	function render() {
+		htmlGameboard.style.display = 'grid'
+		for (i of board) {
+			let div = document.createElement('div')
+			div.classList.add('cell', 'window', 'flex')
+			div.setAttribute('data-index', board.indexOf(i))
+			div.addEventListener('click', function() {
+				currentPlayer.playTurn(div.dataset.index)
+				togglePlayer()
+			})
+			htmlGameboard.appendChild(div)
+		}
+	}
+	
+	function unrender() {
+		while (htmlGameboard.lastChild) {
+			htmlGameboard.removeChild(htmlGameboard.lastChild)
+		}
+		htmlGameboard.style.display = 'none'
+	}
 	
 	return {
-		render,
-		unrender,
 		placeMarker,
 		checkForWin,
+		render,
+		unrender
 	}
 })()
 
