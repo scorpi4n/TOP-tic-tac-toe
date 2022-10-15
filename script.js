@@ -1,16 +1,37 @@
+const p1 = playerFactory()
+const p2 = playerFactory()
+
 const form = (function() {
+	const xRadio = document.getElementById('X')
+	// const oRadio = document.getElementById('O')
+	const userNameInput = document.getElementById('name-1')
 	const checkbox = document.getElementById('ai')
-	checkbox.addEventListener('input', toggleDifficultyInput)
 	const aiBanter = checkbox.nextElementSibling
-	const enemyNameInput = document.querySelector('label[for="name-2"]')
-	// const submitBtn = docuent.getElementById('submit')
+	const difficultyDropdown = document.getElementById('difficulty')
+	const enemyNameLabel = document.querySelector('label[for="name-2"]')
+	const enemyNameInput = document.getElementById('name-2')
+	const submitBtn = document.getElementById('submit')
 	
 	function addEventListeners() {
 		checkbox.addEventListener('input', toggleDifficultyInput)
+		submitBtn.addEventListener('click', function() {
+			p1.setMarker(xRadio.checked)
+			p1.setName(userNameInput.value)
+
+			p2.setMarker(!xRadio.checked)
+			p2.setName(enemyNameInput.value)
+
+			unrender()
+			gameboard.render()
+		})
 	}
+	addEventListeners()
 	
 	function removeEventListeners() {
 		checkbox.removeEventListener('input', toggleDifficultyInput)
+		submitBtn.removeEventListener('click', function() {
+			p2.setName(enemyNameInput.value)
+		})
 	}
 
 	function toggleDifficultyInput() {
@@ -19,11 +40,11 @@ const form = (function() {
 		if (checkbox.checked == true) {
 			difficulty.style.display = 'none'
 			aiBanter.style.display = 'none'
-			enemyNameInput.style.display = 'block'
+			enemyNameLabel.style.display = 'block'
 		} else {
 			difficulty.style.display = 'block'
 			aiBanter.style.display = 'inline'
-			enemyNameInput.style.display = 'none'
+			enemyNameLabel.style.display = 'none'
 		}
 	}
 
@@ -44,11 +65,6 @@ const form = (function() {
 		unrender
 	}
 })()
-
-const p1 = playerFactory()
-p1.setMarker('x')
-const p2 = playerFactory()
-p2.setMarker('o')
 
 const gameboard = (function() {
 	let board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
@@ -143,8 +159,8 @@ function playerFactory() {
 		return name
 	}
 
-	function setMarker(newMarker) {
-		marker = newMarker
+	function setMarker(bool) {
+		bool ? marker = 'x' : marker = 'o'
 	}
 
 	function getMarker() {
@@ -164,11 +180,3 @@ function playerFactory() {
 		playTurn
 	}
 }
-
-
-
-(function(){
-	form.unrender()
-	gameboard.render()
-})()
-
