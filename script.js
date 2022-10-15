@@ -59,17 +59,13 @@ const gameboard = (function() {
 		currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1
 	}
 
-	function pickCell(index) {
+	function placeMarker(marker, index) {
 		let cells = document.querySelectorAll('.cell')
 		for (i of cells) {
 			if (i.dataset.index == index) {
-				return i
+				div = i
 			}
 		}
-	}
-
-	function placeMarker(marker, index) {
-		let div = pickCell(index)
 
 		if (typeof board[index] == typeof '') {
 			console.error('Somebody has already gone there.')
