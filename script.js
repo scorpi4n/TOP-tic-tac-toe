@@ -45,9 +45,19 @@ const form = (function() {
 	}
 })()
 
+const p1 = playerFactory()
+p1.setMarker('x')
+const p2 = playerFactory()
+p2.setMarker('o')
+
 const gameboard = (function() {
 	let board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
-	let htmlGameboard = document.querySelector('.gameboard')
+	const htmlGameboard = document.querySelector('.gameboard')
+	let currentPlayer = p1
+
+	function togglePlayer() {
+		currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1
+	}
 
 	function render() {
 		htmlGameboard.style.display = 'grid'
@@ -55,6 +65,10 @@ const gameboard = (function() {
 			let div = document.createElement('div')
 			div.classList.add('cell', 'window', 'flex')
 			div.setAttribute('data-index', board.indexOf(i))
+			div.addEventListener('click', function() {
+				currentPlayer.playTurn(div.dataset.index)
+				togglePlayer()
+			})
 			htmlGameboard.appendChild(div)
 		}
 	}
@@ -70,13 +84,13 @@ const gameboard = (function() {
 		let cells = document.querySelectorAll('.cell')
 		for (i of cells) {
 			if (i.dataset.index == index) {
-				div = i
+				return i
 			}
 		}
 	}
 
 	function placeMarker(marker, index) {
-		pickCell(index)
+		let div = pickCell(index)
 
 		if (typeof board[index] == typeof '') {
 			console.error('Somebody has already gone there.')
@@ -157,7 +171,8 @@ function playerFactory() {
 
 
 
-const p1 = playerFactory()
-p1.setMarker('x')
-const p2 = playerFactory()
-p2.setMarker('o')
+(function(){
+	form.unrender()
+	gameboard.render()
+})()
+
