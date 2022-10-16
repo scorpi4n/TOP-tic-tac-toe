@@ -7,6 +7,11 @@
 
 /* custom styling */
 
+:root {
+	--red: hsl(351, 100%, 86%, .8);
+	--green: hsl(120, 100%, 86%, .8);
+}
+
 .grid {
 	display: grid;
 }
@@ -27,7 +32,20 @@ body {
 	width: max-content;
 	text-align: center;
 
-	grid-column: 6 / -6;
+	grid-column: 5 / -5;
+	justify-self: center;
+}
+
+#scoreboard {
+	background-image: linear-gradient(to left, var(--red), var(--green));
+	border-radius: 2rem;
+	padding: .1rem 1rem;
+	width: max-content;
+	height: max-content;
+	display: none;
+
+	grid-column: 3 / -3;
+	justify-self: center;
 }
 
 .wrapper {
@@ -37,7 +55,7 @@ body {
 	width: max-content;
 	height: max-content;
 
-	grid-column: 4 / -4;
+	grid-column: 2 / -2;
 	align-self: center;
 	justify-self: center;
 
@@ -113,9 +131,9 @@ form button {
 }
 
 .gameboard div.active-x {
-	background-color: hsl(351, 100%, 86%, .8);
+	background-color: var(--red);
 }
 
 .gameboard div.active-o {
-	background-color: hsl(120, 100%, 86%, .8);
+	background-color: var(--green);
 }

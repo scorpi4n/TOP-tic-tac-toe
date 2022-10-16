@@ -71,6 +71,24 @@ const gameboard = (function() {
 	const htmlGameboard = document.querySelector('.gameboard')
 	let currentPlayer = p1
 
+	const scoreboard = (function() {
+		const displayBoard = document.getElementById('scoreboard')
+
+		function refresh() {
+			displayBoard.innerText = `${p1.getName()} has won ${p1.winCount} times. ${p2.getName()} has won ${p2.winCount} times`
+		}
+
+		function render() {
+			refresh()
+			displayBoard.style.display = 'block'
+		}
+
+		return {
+			render,
+			refresh
+		}
+	})()
+
 	function togglePlayer() {
 		currentPlayer == p1 ? currentPlayer = p2 : currentPlayer = p1
 	}
@@ -112,10 +130,30 @@ const gameboard = (function() {
 
 		for (state of winStates) {
 			if (board[state[0]] == board[state[1]] && board[state[1]] == board[state[2]]) {
-				console.log(`${board[state[0]]} wins`)
+				if (p1.getMarker() == board[state[1]]) {
+					console.log(`${p1.getName()} wins`)
+					p1.winCount++
+				} else {
+					console.log(`${p2.getName()} wins`)
+					p2.winCount++
+				}
+				scoreboard.refresh()
+				removeEventListeners()
 				break
 			}
 		}
+	}
+
+	function removeEventListeners() {
+		let cells = htmlGameboard.querySelectorAll('.cell')
+		for (_ of cells) {
+			_.removeEventListener('click', playTurn)
+		}
+	}
+
+	function playTurn() {
+		currentPlayer.playTurn(this.dataset.index)
+		togglePlayer()
 	}
 
 	function render() {
@@ -124,12 +162,10 @@ const gameboard = (function() {
 			let div = document.createElement('div')
 			div.classList.add('cell', 'window', 'flex')
 			div.setAttribute('data-index', board.indexOf(i))
-			div.addEventListener('click', function() {
-				currentPlayer.playTurn(div.dataset.index)
-				togglePlayer()
-			})
+			div.addEventListener('click', playTurn)
 			htmlGameboard.appendChild(div)
 		}
+		scoreboard.render()
 	}
 	
 	function unrender() {
@@ -172,11 +208,14 @@ function playerFactory() {
 		gameboard.checkForWin()
 	}
 
+	let winCount = 0
+
 	return {
 		setName,
 		getName,
 		setMarker,
 		getMarker,
-		playTurn
+		playTurn,
+		winCount
 	}
 }
