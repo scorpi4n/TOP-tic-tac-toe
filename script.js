@@ -113,7 +113,7 @@ const gameboard = (function() {
 		for (state of winStates) {
 			if (board[state[0]] == board[state[1]] && board[state[1]] == board[state[2]]) {
 				console.log(`${board[state[0]]} wins`)
-				break
+				return (board[state[1]] == 'o' ? false : true)
 			}
 		}
 	}
@@ -138,12 +138,19 @@ const gameboard = (function() {
 		}
 		htmlGameboard.style.display = 'none'
 	}
+
+	function getCurrentPlayer() {
+		return currentPlayer
+	}
 	
 	return {
+		board,
+		togglePlayer,
 		placeMarker,
 		checkForWin,
 		render,
-		unrender
+		unrender,
+		getCurrentPlayer
 	}
 })()
 
