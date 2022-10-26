@@ -113,7 +113,9 @@ const gameboard = (function() {
 		for (state of winStates) {
 			if (board[state[0]] == board[state[1]] && board[state[1]] == board[state[2]]) {
 				console.log(`${board[state[0]]} wins`)
-				return (board[state[1]] == 'o' ? false : true)
+				return board[state[1]] == 'o' ? -1 : 1
+			} else {
+				return 0
 			}
 		}
 	}
