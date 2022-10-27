@@ -37,6 +37,7 @@ function getMoves(state) {
 
 function minimax(gameState, depth, isMaximizing) {
 	if (depth == 0 || gameboard.checkForWin()) {
+		// gameboard.togglePlayer()
 		return evaluateGame(gameState)
 	}
 	
@@ -44,18 +45,18 @@ function minimax(gameState, depth, isMaximizing) {
 	
 	if (isMaximizing) {
 		maxEval = -Infinity
+		gameboard.togglePlayer()
 		for (move of moves) {
 			maxEval = Math.max(maxEval, minimax(move, depth - 1, false))
-			// gameboard.togglePlayer()
 		}
 		return maxEval
 	}
 	
 	if (!isMaximizing) {
 		minEval = Infinity
+		// gameboard.togglePlayer()
 		for (move of moves) {
 			minEval = Math.min(minEval, minimax(move, depth - 1, true))
-			// gameboard.togglePlayer()
 		}
 		return minEval
 	}
