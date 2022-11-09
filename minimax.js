@@ -29,7 +29,7 @@ function getMoves(state) {
 			let copyBoard = [...state]
 			copyBoard[state.indexOf(i)] = gameboard.getCurrentPlayer().getMarker()
 			moves.push(copyBoard)
-			console.log(copyBoard)
+			console.table(copyBoard)
 		}
 	}
 	return moves
@@ -37,7 +37,6 @@ function getMoves(state) {
 
 function minimax(gameState, depth, isMaximizing) {
 	if (depth == 0 || gameboard.checkForWin()) {
-		// gameboard.togglePlayer()
 		return evaluateGame(gameState)
 	}
 	
@@ -54,7 +53,6 @@ function minimax(gameState, depth, isMaximizing) {
 	
 	if (!isMaximizing) {
 		minEval = Infinity
-		// gameboard.togglePlayer()
 		for (move of moves) {
 			minEval = Math.min(minEval, minimax(move, depth - 1, true))
 		}
