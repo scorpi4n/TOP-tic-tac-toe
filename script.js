@@ -67,7 +67,7 @@ const form = (function() {
 })()
 
 const gameboard = (function() {
-	let board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+	let board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 	const htmlGameboard = document.querySelector('.gameboard')
 	let currentPlayer = p1
 
@@ -114,10 +114,9 @@ const gameboard = (function() {
 			if (board[state[0]] == board[state[1]] && board[state[1]] == board[state[2]]) {
 				console.log(`${board[state[1]]} wins`)
 				return board[state[1]] == 'o' ? -1 : 1
-			} else {
-				return 0
 			}
 		}
+		return 0
 	}
 
 	function render() {
