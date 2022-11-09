@@ -1,6 +1,6 @@
 function evaluateGame(state) {
 	let value = 0
-	let winCheck = gameboard.checkForWin()
+	let winCheck = checkForWin(state)
 
 	switch (winCheck) {
 		case -1:
@@ -29,14 +29,14 @@ function getMoves(state) {
 			let copyBoard = [...state]
 			copyBoard[state.indexOf(i)] = gameboard.getCurrentPlayer().getMarker()
 			moves.push(copyBoard)
-			console.table(copyBoard)
+			console.log(copyBoard)
 		}
 	}
 	return moves
 }
 
 function minimax(gameState, depth, isMaximizing) {
-	if (depth == 0 || gameboard.checkForWin()) {
+	if (depth == 0) {
 		return evaluateGame(gameState)
 	}
 	

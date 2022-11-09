@@ -92,33 +92,6 @@ const gameboard = (function() {
 		}
 	}
 
-	function checkForWin() {
-		// 0, 1, 2,
-		// 3, 4, 5,
-		// 6, 7, 8
-		let winStates = [
-			// horizontal wins
-			[0, 1, 2],
-			[3, 4, 5],
-			[6, 7, 8],
-			// vertical wins
-			[0, 3, 6],
-			[1, 4, 7],
-			[2, 5, 8],
-			// diagonal wins
-			[0, 4, 8],
-			[2, 4, 6]
-		]
-
-		for (state of winStates) {
-			if (board[state[0]] == board[state[1]] && board[state[1]] == board[state[2]]) {
-				console.log(`${board[state[1]]} wins`)
-				return board[state[1]] == 'o' ? -1 : 1
-			}
-		}
-		return 0
-	}
-
 	function render() {
 		htmlGameboard.style.display = 'grid'
 		for (i of board) {
@@ -148,7 +121,7 @@ const gameboard = (function() {
 		board,
 		togglePlayer,
 		placeMarker,
-		checkForWin,
+		// checkForWin,
 		render,
 		unrender,
 		getCurrentPlayer
@@ -177,7 +150,7 @@ function playerFactory() {
 
 	function playTurn(index) {
 		gameboard.placeMarker(getMarker(), index)
-		gameboard.checkForWin()
+		checkForWin(gameboard.board)
 	}
 
 	return {
@@ -187,4 +160,31 @@ function playerFactory() {
 		getMarker,
 		playTurn
 	}
+}
+
+function checkForWin(gameState) {
+	// 0, 1, 2,
+	// 3, 4, 5,
+	// 6, 7, 8
+	let winStates = [
+		// horizontal wins
+		[0, 1, 2],
+		[3, 4, 5],
+		[6, 7, 8],
+		// vertical wins
+		[0, 3, 6],
+		[1, 4, 7],
+		[2, 5, 8],
+		// diagonal wins
+		[0, 4, 8],
+		[2, 4, 6]
+	]
+
+	for (state of winStates) {
+		if (gameState[state[0]] == gameState[state[1]] && gameState[state[1]] == gameState[state[2]]) {
+			console.log(`${gameState[state[1]]} wins`)
+			return gameState[state[1]] == 'o' ? -1 : 1
+		}
+	}
+	return 0
 }
