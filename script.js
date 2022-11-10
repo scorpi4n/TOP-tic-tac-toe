@@ -15,11 +15,21 @@ const form = (function() {
 	function addEventListeners() {
 		checkbox.addEventListener('input', toggleDifficultyInput)
 		submitBtn.addEventListener('click', function() {
-			p1.setMarker(xRadio.checked)
-			p1.setName(userNameInput.value)
 
+			p1.setMarker(xRadio.checked)
 			p2.setMarker(!xRadio.checked)
-			p2.setName(enemyNameInput.value)
+
+			if (!userNameInput.value) {
+				p1.setName(p1.getMarker().toUpperCase())
+			} else {
+				p1.setName(userNameInput.value)
+			}
+
+			if (!enemyNameInput.value) {
+				p2.setName(p2.getMarker().toUpperCase())
+			} else {
+				p2.setName(enemyNameInput.value)
+			}
 
 			unrender()
 			gameboard.render()
