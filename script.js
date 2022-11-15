@@ -1,7 +1,7 @@
 const p1 = playerFactory()
 const p2 = playerFactory()
 
-const form = (function() {
+const form = (function () {
 	const xRadio = document.getElementById('X')
 	// const oRadio = document.getElementById('O')
 	const userNameInput = document.getElementById('name-1')
@@ -11,10 +11,10 @@ const form = (function() {
 	const enemyNameLabel = document.querySelector('label[for="name-2"]')
 	const enemyNameInput = document.getElementById('name-2')
 	const submitBtn = document.getElementById('submit')
-	
+
 	function addEventListeners() {
 		checkbox.addEventListener('input', toggleDifficultyInput)
-		submitBtn.addEventListener('click', function() {
+		submitBtn.addEventListener('click', function () {
 
 			p1.setMarker(xRadio.checked)
 			p2.setMarker(!xRadio.checked)
@@ -36,17 +36,17 @@ const form = (function() {
 		})
 	}
 	addEventListeners()
-	
+
 	function removeEventListeners() {
 		checkbox.removeEventListener('input', toggleDifficultyInput)
-		submitBtn.removeEventListener('click', function() {
+		submitBtn.removeEventListener('click', function () {
 			p2.setName(enemyNameInput.value)
 		})
 	}
 
 	function toggleDifficultyInput() {
 		let difficulty = document.getElementById('difficulty-setting')
-		
+
 		if (checkbox.checked == true) {
 			difficulty.style.display = 'none'
 			aiBanter.style.display = 'none'
@@ -76,12 +76,12 @@ const form = (function() {
 	}
 })()
 
-const gameboard = (function() {
+const gameboard = (function () {
 	let board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
 	const htmlGameboard = document.querySelector('.gameboard')
 	let currentPlayer = p1
 
-	const scoreboard = (function() {
+	const scoreboard = (function () {
 		const displayBoard = document.getElementById('scoreboard')
 
 		function refresh() {
@@ -152,6 +152,10 @@ const gameboard = (function() {
 				break
 			}
 		}
+
+		if (board.filter(function (i) { return typeof i == typeof '' ? i : null }).length == 9) {
+			alert("It's a tie!")
+		}
 	}
 
 	function removeEventListeners() {
@@ -177,14 +181,14 @@ const gameboard = (function() {
 		}
 		scoreboard.render()
 	}
-	
+
 	function unrender() {
 		while (htmlGameboard.lastChild) {
 			htmlGameboard.removeChild(htmlGameboard.lastChild)
 		}
 		htmlGameboard.style.display = 'none'
 	}
-	
+
 	return {
 		placeMarker,
 		checkForWin,
