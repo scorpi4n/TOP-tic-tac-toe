@@ -2,22 +2,21 @@ function evaluateGame(state) {
 	let value = 0
 	let winCheck = checkForWin(state)
 
-	switch (winCheck) {
-		case -1:
-			value += 10
-			break;
-
-		case 1:
-			value -+ 10
-			break;
-	
-		default:
-			break;
+	if (winCheck == -1) {
+		value += 10
+		for (i of state) {
+			if (typeof i == typeof 0) {
+				value++
+			}
+		}
+	} else if (winCheck == 1) {
+		value -= 10
+		for (i of state) {
+			if (typeof i == typeof 0) {
+				value--
+			}
+		}
 	}
-
-	// if (winCheck != 0) {
-	// 	winCheck ? value = -10 : value = 10
-	// }
 
 	return value
 }
@@ -37,11 +36,13 @@ function getMoves(state) {
 
 function minimax(gameState, depth, isMaximizing) {
 	if (depth == 0) {
+		// return static evaluation
 		return evaluateGame(gameState)
 	}
-	
+
 	let moves = getMoves(gameState)
-	
+
+	// is maximizing player
 	if (isMaximizing) {
 		maxEval = -Infinity
 		gameboard.togglePlayer()
@@ -50,7 +51,8 @@ function minimax(gameState, depth, isMaximizing) {
 		}
 		return maxEval
 	}
-	
+
+	// is NOT maximizing player
 	if (!isMaximizing) {
 		minEval = Infinity
 		for (move of moves) {
