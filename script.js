@@ -1,7 +1,7 @@
 const p1 = playerFactory()
 const p2 = playerFactory()
 
-const form = (function() {
+const form = (function () {
 	const xRadio = document.getElementById('X')
 	// const oRadio = document.getElementById('O')
 	const userNameInput = document.getElementById('name-1')
@@ -11,10 +11,10 @@ const form = (function() {
 	const enemyNameLabel = document.querySelector('label[for="name-2"]')
 	const enemyNameInput = document.getElementById('name-2')
 	const submitBtn = document.getElementById('submit')
-	
+
 	function addEventListeners() {
 		checkbox.addEventListener('input', toggleDifficultyInput)
-		submitBtn.addEventListener('click', function() {
+		submitBtn.addEventListener('click', function () {
 			p1.setMarker(xRadio.checked)
 			p1.setName(userNameInput.value)
 
@@ -26,17 +26,17 @@ const form = (function() {
 		})
 	}
 	addEventListeners()
-	
+
 	function removeEventListeners() {
 		checkbox.removeEventListener('input', toggleDifficultyInput)
-		submitBtn.removeEventListener('click', function() {
+		submitBtn.removeEventListener('click', function () {
 			p2.setName(enemyNameInput.value)
 		})
 	}
 
 	function toggleDifficultyInput() {
 		let difficulty = document.getElementById('difficulty-setting')
-		
+
 		if (checkbox.checked == true) {
 			difficulty.style.display = 'none'
 			aiBanter.style.display = 'none'
@@ -66,7 +66,7 @@ const form = (function() {
 	}
 })()
 
-const gameboard = (function() {
+const gameboard = (function () {
 	let board = [0, 1, 2, 3, 4, 5, 6, 7, 8]
 	const htmlGameboard = document.querySelector('.gameboard')
 	let currentPlayer = p1
@@ -98,14 +98,14 @@ const gameboard = (function() {
 			let div = document.createElement('div')
 			div.classList.add('cell', 'window', 'flex')
 			div.setAttribute('data-index', board.indexOf(i))
-			div.addEventListener('click', function() {
+			div.addEventListener('click', function () {
 				currentPlayer.playTurn(div.dataset.index)
 				togglePlayer()
 			})
 			htmlGameboard.appendChild(div)
 		}
 	}
-	
+
 	function unrender() {
 		while (htmlGameboard.lastChild) {
 			htmlGameboard.removeChild(htmlGameboard.lastChild)
@@ -116,7 +116,7 @@ const gameboard = (function() {
 	function getCurrentPlayer() {
 		return currentPlayer
 	}
-	
+
 	return {
 		board,
 		togglePlayer,
