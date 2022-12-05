@@ -1,6 +1,20 @@
 const p1 = playerFactory()
 const p2 = playerFactory()
 
+const WIN_STATES = [
+	// horizontal wins
+	[0, 1, 2],
+	[3, 4, 5],
+	[6, 7, 8],
+	// vertical wins
+	[0, 3, 6],
+	[1, 4, 7],
+	[2, 5, 8],
+	// diagonal wins
+	[0, 4, 8],
+	[2, 4, 6]
+]
+
 const form = (function () {
 	const xRadio = document.getElementById('X')
 	// const oRadio = document.getElementById('O')
@@ -12,36 +26,35 @@ const form = (function () {
 	const enemyNameInput = document.getElementById('name-2')
 	const submitBtn = document.getElementById('submit')
 
+	function submit() {
+		p1.setMarker(xRadio.checked)
+		p2.setMarker(!xRadio.checked)
+
+		if (!userNameInput.value) {
+			p1.setName(p1.getMarker().toUpperCase())
+		} else {
+			p1.setName(userNameInput.value)
+		}
+
+		if (!enemyNameInput.value) {
+			p2.setName(p2.getMarker().toUpperCase())
+		} else {
+			p2.setName(enemyNameInput.value)
+		}
+
+		unrender()
+		gameboard.render()
+	}
+
 	function addEventListeners() {
 		checkbox.addEventListener('input', toggleDifficultyInput)
-		submitBtn.addEventListener('click', function () {
-
-			p1.setMarker(xRadio.checked)
-			p2.setMarker(!xRadio.checked)
-
-			if (!userNameInput.value) {
-				p1.setName(p1.getMarker().toUpperCase())
-			} else {
-				p1.setName(userNameInput.value)
-			}
-
-			if (!enemyNameInput.value) {
-				p2.setName(p2.getMarker().toUpperCase())
-			} else {
-				p2.setName(enemyNameInput.value)
-			}
-
-			unrender()
-			gameboard.render()
-		})
+		submitBtn.addEventListener('click', submit)
 	}
 	addEventListeners()
 
 	function removeEventListeners() {
 		checkbox.removeEventListener('input', toggleDifficultyInput)
-		submitBtn.removeEventListener('click', function () {
-			p2.setName(enemyNameInput.value)
-		})
+		submitBtn.removeEventListener('click', submit)
 	}
 
 	function toggleDifficultyInput() {
@@ -112,6 +125,7 @@ const gameboard = (function () {
 		}
 
 		if (typeof board[index] == typeof '') {
+			console.log(board)
 			console.error('Somebody has already gone there.')
 		} else {
 			div.classList.add(`active-${marker}`)
@@ -121,24 +135,7 @@ const gameboard = (function () {
 	}
 
 	function checkForWin() {
-		// 0, 1, 2,
-		// 3, 4, 5,
-		// 6, 7, 8
-		let winStates = [
-			// horizontal wins
-			[0, 1, 2],
-			[3, 4, 5],
-			[6, 7, 8],
-			// vertical wins
-			[0, 3, 6],
-			[1, 4, 7],
-			[2, 5, 8],
-			// diagonal wins
-			[0, 4, 8],
-			[2, 4, 6]
-		]
-
-		for (state of winStates) {
+		for (state of WIN_STATES) {
 			if (board[state[0]] == board[state[1]] && board[state[1]] == board[state[2]]) {
 				if (p1.getMarker() == board[state[1]]) {
 					console.log(`${p1.getName()} wins`)
@@ -147,8 +144,16 @@ const gameboard = (function () {
 					console.log(`${p2.getName()} wins`)
 					p2.winCount++
 				}
+
 				scoreboard.refresh()
 				removeEventListeners()
+
+				if (prompt("Play again? y/N") == "y") {
+					gameboard.unrender()
+					form.render()
+					board = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+				}
+
 				break
 			}
 		}
