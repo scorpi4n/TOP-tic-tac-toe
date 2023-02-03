@@ -1,60 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-	<meta charset="UTF-8">
-	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Tic Tac Toe</title>
-	<link rel="stylesheet" href="./reset.css">
-	<link rel="stylesheet" href="./style.css">
-	<script src="./script.js" defer></script>
-	<script src="./minimax.js" defer></script>
-</head>
-<body class="grid">
-	<h1 class="title">Tic Tac Toe</h1>
-	<div class="wrapper flex">
-		<form class="window flex" action="#" method="post">
-			<div class="flex">
-				<h2>Create your character</h2>
-				<div>
-					<label for="X">
-						Do you want to play as X's or O's?
-						<input checked type="radio" name="shape" id="X">
-						X
-					</label>
-					<label for="O">
-						<input type="radio" name="shape" id="O">
-						O
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Tic Tac Toe</title>
+		<link rel="stylesheet" href="./reset.css" />
+		<link rel="stylesheet" href="./style.css" />
+		<script src="./minimax.js" defer></script>
+		<script src="./script.js" defer></script>
+	</head>
+	<body class="grid">
+		<h1 class="title">Tic Tac Toe</h1>
+		<div class="wrapper flex">
+			<form class="window flex" action="#" method="post">
+				<div class="flex">
+					<h2>Create your character</h2>
+					<div>
+						<label for="X">
+							Do you want to play as X's or O's?
+							<input checked type="radio" name="shape" id="X" />
+							X
+						</label>
+						<label for="O">
+							<input type="radio" name="shape" id="O" />
+							O
+						</label>
+					</div>
+					<label for="name-1">
+						And what shall I call you?
+						<input type="text" name="name-1" id="name-1" />
 					</label>
 				</div>
-				<label for="name-1">
-					And what shall I call you?
-					<input type="text" name="name-1" id="name-1">
-				</label>
-			</div>
-			<div class="flex">
-				<h2>Choose your enemy</h2>
-				<label for="ai">
-					Do you have a friend to play against?
-					<input type="checkbox" name="ai" id="ai">
-					<span>If not, that's fine. I can play</span>
-				</label>
-				<label id="difficulty-setting" for="difficulty">
-					How well would you like me to play?
-					<select name="difficulty" id="difficulty">
-						<option value="1">Not well at all</option>
-						<option value="2">As well as any other human</option>
-						<option value="3">Impossibly well</option>
-					</select>
-				</label>
-				<label for="name-2">
-					And who is your friend?
-					<input type="text" name="name-2" id="name-2">
-				</label>
-				<button id="submit" type="button">Play</button>
-			</div>
-		</form>
-		<div class="gameboard grid"></div>
-	</div>
-</body>
+				<div class="flex">
+					<h2>Choose your enemy</h2>
+					<label for="ai">
+						Do you have a friend to play against?
+						<input type="checkbox" name="ai" id="ai" />
+						<span>If not, that's fine. I can play</span>
+					</label>
+					<label id="difficulty-setting" for="difficulty">
+						How well would you like me to play?
+						<select name="difficulty" id="difficulty">
+							<option value="1">Not well at all</option>
+							<option value="2">As well as any other human</option>
+							<option value="3">Impossibly well</option>
+						</select>
+					</label>
+					<label for="name-2">
+						And who is your friend?
+						<input type="text" name="name-2" id="name-2" />
+					</label>
+					<button id="submit" type="button">Play</button>
+				</div>
+			</form>
+			<div class="gameboard grid"></div>
+		</div>
+	</body>
 </html>
