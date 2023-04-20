@@ -1,0 +1,24 @@
+{
+  "name": "top-tic-tac-toe",
+  "version": "1.0.0",
+  "description": "",
+  "main": "dom.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/scorpi4n/tic-tac-toe.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/scorpi4n/tic-tac-toe/issues"
+  },
+  "homepage": "https://github.com/scorpi4n/tic-tac-toe#readme",
+  "devDependencies": {
+    "typescript": "^5.0.4",
+    "vite": "^4.3.0"
+  }
+}
