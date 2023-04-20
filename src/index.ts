@@ -1,1 +1,4 @@
-// import "./form.js";
+import Form from "./form";
+import "./game";
+
+Form.render();
