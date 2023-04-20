@@ -3,14 +3,24 @@ import * as dom from "./dom";
 export class Player {
   name: string;
   private _marker: string;
+  private _wins: number;
 
   constructor(name: string, marker: string) {
     this.name = name;
     this._marker = marker.toLowerCase();
+    this._wins = 0;
   }
 
   get marker() {
     return this._marker;
+  }
+
+  get wins() {
+    return this._wins;
+  }
+
+  incrementWins() {
+    this._wins++;
   }
 }
 
