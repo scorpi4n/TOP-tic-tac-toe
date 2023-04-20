@@ -1,4 +1,5 @@
 export const gameboard = document.querySelector(".gameboard") as HTMLElement;
+export const scoreboard = document.getElementById("scoreboard") as HTMLElement;
 
 // form
 export const form = document.querySelector("form") as HTMLFormElement;

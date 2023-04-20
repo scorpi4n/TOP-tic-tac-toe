@@ -30,6 +30,18 @@ body {
 	grid-column: 6 / -6;
 }
 
+#scoreboard {
+	background-image: linear-gradient(to left, var(--red), var(--green));
+	border-radius: 2rem;
+	padding: .1rem 1rem;
+	width: max-content;
+	height: max-content;
+	display: none;
+
+	grid-column: 3 / -3;
+	justify-self: center;
+}
+
 .wrapper {
 	background-image: linear-gradient(to bottom right, lavender 35%, lightgreen);
 	border-radius: 2rem;

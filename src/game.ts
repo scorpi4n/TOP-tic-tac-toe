@@ -84,7 +84,10 @@ export class Game {
         this.board[index[1]] === this.board[index[2]] &&
         this.board[index[1]] !== null
       ) {
-        return this.p1.marker === this.board[index[1]] ? this.p1 : this.p2;
+        const winner =
+          this.p1.marker === this.board[index[1]] ? this.p1 : this.p2;
+        winner.incrementWins();
+        return winner;
       }
     }
 
@@ -113,6 +116,7 @@ export class Game {
       });
       dom.gameboard.appendChild(div);
     });
+    this.renderScoreboard();
   }
 
   unrender() {
@@ -120,5 +124,14 @@ export class Game {
       dom.gameboard.removeChild(dom.gameboard.lastChild);
     }
     dom.gameboard.style.display = "none";
+  }
+
+  refreshScoreboard() {
+    dom.scoreboard.innerText = `${this.p1.name} has won ${this.p1.wins} times. ${this.p2.name} has won ${this.p2.wins} times`;
+  }
+
+  renderScoreboard() {
+    this.refreshScoreboard();
+    dom.scoreboard.style.display = "block";
   }
 }
