@@ -31,7 +31,7 @@ function removeEventListeners() {
 }
 
 function toggleDifficultyInput() {
-  let difficulty = document.getElementById("difficulty-setting");
+  const difficulty = document.getElementById("difficulty-setting");
 
   if (checkbox.checked == true) {
     difficulty.style.display = "none";
@@ -56,7 +56,4 @@ function unrender() {
   form.style.display = "none";
 }
 
-export {
-  render,
-  unrender,
-};
+export { render, unrender };

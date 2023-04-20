@@ -1,1 +1,1 @@
-export const gameboard = document.querySelector(".gameboard")
+export const gameboard = document.querySelector(".gameboard");

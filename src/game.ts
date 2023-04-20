@@ -5,8 +5,8 @@ class Player {
   marker;
 
   constructor(name, marker) {
-    this.name = name
-    this.marker = marker
+    this.name = name;
+    this.marker = marker;
   }
 
   playTurn(index) {
@@ -16,13 +16,10 @@ class Player {
 }
 
 export class Game {
-
-
-  constructor() { }
+  constructor() {}
 }
 
-
-let board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
+const board = [0, 1, 2, 3, 4, 5, 6, 7, 8];
 let currentPlayer = p1;
 
 function togglePlayer() {
@@ -30,7 +27,7 @@ function togglePlayer() {
 }
 
 function placeMarker(marker, index) {
-  let cells = document.querySelectorAll(".cell");
+  const cells = document.querySelectorAll(".cell");
   for (i of cells) {
     if (i.dataset.index == index) {
       div = i;
@@ -49,7 +46,7 @@ function placeMarker(marker, index) {
 function render() {
   dom.gameboard.style.display = "grid";
   for (i of board) {
-    let div = document.createElement("div");
+    const div = document.createElement("div");
     div.classList.add("cell", "window", "flex");
     div.setAttribute("data-index", board.indexOf(i));
     div.addEventListener("click", function () {
@@ -75,7 +72,7 @@ function isTerminal(gameState) {
   // 0, 1, 2,
   // 3, 4, 5,
   // 6, 7, 8
-  let winStates = [
+  const winStates = [
     // horizontal wins
     [0, 1, 2],
     [3, 4, 5],
