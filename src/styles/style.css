@@ -2,7 +2,7 @@
 
 @font-face {
 	font-family: 'Permanent Marker';
-	src: url(./assets/PermanentMarker-Regular.ttf);
+	src: url(../assets/PermanentMarker-Regular.ttf);
 }
 
 /* custom styling */
@@ -33,6 +33,18 @@ body {
 	text-align: center;
 
 	grid-column: 5 / -5;
+	justify-self: center;
+}
+
+#scoreboard {
+	background-image: linear-gradient(to left, var(--red), var(--green));
+	border-radius: 2rem;
+	padding: .1rem 1rem;
+	width: max-content;
+	height: max-content;
+	display: none;
+
+	grid-column: 3 / -3;
 	justify-self: center;
 }
 
