@@ -33,7 +33,7 @@ export class Game {
   constructor(p1: Player, p2: Player) {
     this.p1 = p1;
     this.p2 = p2;
-    this._currentPlayer = this.p1;
+    this._currentPlayer = p1.marker === "x" ? p1 : p2;
     this._board = new Array(9).fill(null);
   }
 
@@ -87,6 +87,7 @@ export class Game {
         const winner =
           this.p1.marker === this.board[index[1]] ? this.p1 : this.p2;
         winner.incrementWins();
+        this.refreshScoreboard();
         return winner;
       }
     }
@@ -112,7 +113,12 @@ export class Game {
       div.classList.add("cell", "window", "flex");
       div.setAttribute("data-index", `${i}`);
       div.addEventListener("click", () => {
-        this.placeMarker(parseInt(div.dataset.index || "6"));
+        if (!div.dataset.index) return;
+        const { index } = div.dataset;
+        div.classList.add(`active-${this.currentPlayer.marker}`);
+        div.innerText = this.currentPlayer.marker;
+        this.placeMarker(parseInt(index));
+        this.winner();
       });
       dom.gameboard.appendChild(div);
     });
