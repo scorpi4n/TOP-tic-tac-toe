@@ -59,7 +59,7 @@ export class Game {
     this.togglePlayer();
   }
 
-  winner(): Player | null {
+  get winner(): Player | null {
     // 0, 1, 2,
     // 3, 4, 5,
     // 6, 7, 8
@@ -96,7 +96,7 @@ export class Game {
   }
 
   isTerminal(): boolean {
-    if (this.winner() !== null) return true;
+    if (this.winner !== null) return true;
 
     const isFull = !this.board.includes(null);
     if (isFull) {
@@ -118,7 +118,7 @@ export class Game {
         div.classList.add(`active-${this.currentPlayer.marker}`);
         div.innerText = this.currentPlayer.marker;
         this.placeMarker(parseInt(index));
-        this.winner();
+        this.winner;
       });
       dom.gameboard.appendChild(div);
     });
