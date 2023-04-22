@@ -86,8 +86,6 @@ export class Game {
       ) {
         const winner =
           this.p1.marker === this.board[index[1]] ? this.p1 : this.p2;
-        winner.incrementWins();
-        this.refreshScoreboard();
         return winner;
       }
     }
@@ -115,10 +113,16 @@ export class Game {
       div.addEventListener("click", () => {
         if (!div.dataset.index) return;
         const { index } = div.dataset;
+        if (this.board[parseInt(index)] !== null) return;
         div.classList.add(`active-${this.currentPlayer.marker}`);
         div.innerText = this.currentPlayer.marker;
         this.placeMarker(parseInt(index));
-        this.winner;
+        if (this.winner !== null) {
+          this.winner.incrementWins();
+          this.refreshScoreboard();
+          const cells = [...dom.gameboard.childNodes];
+          cells.forEach((cell) => cell.replaceWith(cell.cloneNode(true)));
+        }
       });
       dom.gameboard.appendChild(div);
     });
