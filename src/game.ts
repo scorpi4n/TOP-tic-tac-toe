@@ -104,26 +104,29 @@ export class Game {
     return false;
   }
 
+  handleClick(e) {
+    if (!e.target.dataset.index) return;
+    const { index } = e.target.dataset;
+    if (this.board[parseInt(index)] !== null) return;
+    e.target.classList.add(`active-${this.currentPlayer.marker}`);
+    e.target.innerText = this.currentPlayer.marker;
+    this.placeMarker(parseInt(index));
+
+    if (this.winner !== null) {
+      this.winner.incrementWins();
+      this.refreshScoreboard();
+      const cells = [...dom.gameboard.childNodes];
+      cells.forEach((cell) => cell.replaceWith(cell.cloneNode(true)));
+    }
+  }
+
   render() {
     dom.gameboard.style.display = "grid";
     this.board.forEach((_, i) => {
       const div = document.createElement("div");
       div.classList.add("cell", "window", "flex");
       div.setAttribute("data-index", `${i}`);
-      div.addEventListener("click", () => {
-        if (!div.dataset.index) return;
-        const { index } = div.dataset;
-        if (this.board[parseInt(index)] !== null) return;
-        div.classList.add(`active-${this.currentPlayer.marker}`);
-        div.innerText = this.currentPlayer.marker;
-        this.placeMarker(parseInt(index));
-        if (this.winner !== null) {
-          this.winner.incrementWins();
-          this.refreshScoreboard();
-          const cells = [...dom.gameboard.childNodes];
-          cells.forEach((cell) => cell.replaceWith(cell.cloneNode(true)));
-        }
-      });
+      div.addEventListener("click", this.handleClick.bind(this));
       dom.gameboard.appendChild(div);
     });
     this.renderScoreboard();
