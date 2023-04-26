@@ -1,4 +1,5 @@
 import * as dom from "./dom";
+import { evaluateGame, getMoves } from "./minimax";
 
 export class Player {
   name: string;
@@ -112,6 +113,12 @@ export class Game {
     e.target.innerText = this.currentPlayer.marker;
     this.placeMarker(parseInt(index));
 
+    // i think this is where the minimax check and call will go
+
+    if (this.p2.name === "simba" && this.currentPlayer === this.p2) {
+      console.log(this.minimax(true));
+    }
+
     if (this.winner !== null) {
       this.winner.incrementWins();
       this.refreshScoreboard();
@@ -146,5 +153,34 @@ export class Game {
   renderScoreboard() {
     this.refreshScoreboard();
     dom.scoreboard.style.display = "block";
+  }
+
+  minimax(isMaximizing: boolean): number {
+    if (this.isTerminal()) return evaluateGame(this);
+
+    let value: number;
+
+    switch (isMaximizing) {
+      case true: {
+        value = -Infinity;
+        for (const move of getMoves(this)) {
+          this.placeMarker(move);
+          value = Math.max(value, this.minimax(false));
+          this.board[move] = null;
+          this.togglePlayer();
+        }
+        return value;
+      }
+      case false: {
+        value = Infinity;
+        for (const move of getMoves(this)) {
+          this.placeMarker(move);
+          value = Math.min(value, this.minimax(true));
+          this.board[move] = null;
+          this.togglePlayer();
+        }
+        return value;
+      }
+    }
   }
 }
